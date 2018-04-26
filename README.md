@@ -1,5 +1,5 @@
 # BitcoinTracker
-HCI BitcointTracker
+HCI BitcoinTracker
 
 ## Readme - M3
 
