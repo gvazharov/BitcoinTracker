@@ -84,23 +84,35 @@ public class ManagePortfolioCoinsFragment extends Fragment {
                 } else {
 
                     if (savedCoins.contains(getCoin)) {
-
-                        updateCoinAmount(getCoin, getAmount);
-                    }
-                    Coin coin = new Coin();
-                    coin.setName(getCoin);
-                    coin.setAmount(getAmount);
-                    coin.setCurrency("$");
-                    coinList.add(coin);
-                    coinAdapter.updateAdapter(coinList);
+                        updateCoinAmount(getCoin,getAmount);
+                    } else renderCoinInput(getCoin, getAmount);
                 }
             }
         });
     }
 
 
-    private void updateCoinAmount(String name, String amount){
+    private String updateCoinAmount(String name, String amount) {
+        String updatedAmount = "";
+        for (Coin aCoinList : coinList) {
+            if (aCoinList.getName().equals(name)) {
+                String previousAmount = aCoinList.getAmount();
+                Double value = Double.parseDouble(previousAmount) + Double.parseDouble(amount);
+                updatedAmount = String.valueOf(value);
+                aCoinList.setAmount(updatedAmount);
+                coinAdapter.updateAdapter(coinList);
+            }
+        }
+        return updatedAmount;
+    }
 
+    private void renderCoinInput(String name, String amount) {
+        Coin coin = new Coin();
+        coin.setName(name);
+        coin.setAmount(amount);
+        coin.setCurrency("$");
+        coinList.add(coin);
+        coinAdapter.updateAdapter(coinList);
     }
 
 }
