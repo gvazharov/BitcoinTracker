@@ -10,7 +10,6 @@ import at.ac.univie.hci.bitcointracker.R;
  * which this fragment is working is the cryptoPrice_layout
  */
 public class PortfolioActivity extends FragmentActivity {
-
     /**
      * When the application is started the method onCreate is called and invoking the
      * Fragment Manager. The Fragment Manager is responsible for managing all fragments
@@ -29,11 +28,13 @@ public class PortfolioActivity extends FragmentActivity {
         }
 
         CoinPriceFragment coinPriceFragment = new CoinPriceFragment();
-        ChartPriceFragment chartPriceFragment = new ChartPriceFragment();
+//        ChartPriceFragment chartPriceFragment = new ChartPriceFragment();
+        ManagePortfolioCoinsFragment manageCoin = new ManagePortfolioCoinsFragment();
+//        newAddCoin newAddCoin = new newAddCoin();
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.container_portfolio, chartPriceFragment)
-                .add(R.id.container_portfolio, coinPriceFragment)
+//                .add(R.id.container_portfolio, coinPriceFragment)
+                .add(R.id.container_portfolio, manageCoin)
                 .commit();
 
     }
