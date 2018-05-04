@@ -83,7 +83,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"/>
 
-    <ListView
+    <com.baoyz.swipemenulistview.SwipeMenuListView
             android:id="@+id/listViewCoin"
             android:layout_width="300dp"
             android:layout_height="250dp"

@@ -60,7 +60,7 @@ public class PortfolioMemory {
                     favorite.setAmount(coin.getAmount());
                 }
             }
-                saveFavorites(context, favorites);
+            saveFavorites(context, favorites);
         }
     }
 

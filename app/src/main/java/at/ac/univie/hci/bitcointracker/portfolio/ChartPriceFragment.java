@@ -20,11 +20,11 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
 
-public class ChartPriceFragment extends Fragment{
+public class ChartPriceFragment extends Fragment {
 
 
-     private static final String TAG = "PortfolioActivity";
-     private LineChart lineChart;
+    private static final String TAG = "PortfolioActivity";
+    private LineChart lineChart;
 
     /**
      * onCreateView is invoked when this fragment is created and here I am initialising my TextViews
@@ -66,13 +66,13 @@ public class ChartPriceFragment extends Fragment{
 
         LimitLine upper_limit = new LimitLine(1800f, " HIGH DANGER");
         upper_limit.setLineWidth(4f);
-        upper_limit.enableDashedLine(10f,10f,0);
+        upper_limit.enableDashedLine(10f, 10f, 0);
         upper_limit.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
         upper_limit.setTextSize(10f);
 
         LimitLine lower_limit = new LimitLine(300f, "LOW DANGER");
         lower_limit.setLineWidth(4f);
-        lower_limit.enableDashedLine(10f,10f,0);
+        lower_limit.enableDashedLine(10f, 10f, 0);
         lower_limit.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
         lower_limit.setTextSize(10f);
 
@@ -82,7 +82,7 @@ public class ChartPriceFragment extends Fragment{
         leftAxis.addLimitLine(lower_limit);
         leftAxis.setAxisMaximum(2000F);
         leftAxis.setAxisMinimum(0f);
-        leftAxis.enableGridDashedLine(10f,10f,0);
+        leftAxis.enableGridDashedLine(10f, 10f, 0);
         leftAxis.setDrawLimitLinesBehindData(true);
 
         lineChart.getAxisRight().setEnabled(false);
@@ -113,7 +113,7 @@ public class ChartPriceFragment extends Fragment{
         LineData data = new LineData(lineDataSets);
         lineChart.setData(data);
 
-        String[] months = new String[] {"Dec","Jan", "Feb", "Mar", "Apr", "May"};
+        String[] months = new String[]{"Dec", "Jan", "Feb", "Mar", "Apr", "May"};
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setValueFormatter(new MyAxisValueFormatter(months));
@@ -122,7 +122,7 @@ public class ChartPriceFragment extends Fragment{
         return rootView;
     }
 
-    public class MyAxisValueFormatter implements IAxisValueFormatter{
+    public class MyAxisValueFormatter implements IAxisValueFormatter {
         private String[] values;
 
         MyAxisValueFormatter(String[] values) {

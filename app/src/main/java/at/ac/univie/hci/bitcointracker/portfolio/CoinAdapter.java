@@ -15,7 +15,7 @@ public class CoinAdapter extends BaseAdapter {
     private Context mContext;
 
 
-    public CoinAdapter(Context mContext, List<Coin>  coinArrayList) {
+    public CoinAdapter(Context mContext, List<Coin> coinArrayList) {
         this.mContext = mContext;
         this.coinArrayList = coinArrayList;
     }
@@ -42,18 +42,23 @@ public class CoinAdapter extends BaseAdapter {
         TextView tvName = (TextView) view.findViewById(R.id.nameTest);
         TextView tvCurrency = (TextView) view.findViewById(R.id.coinCurrencyTest);
         TextView tvAmount = (TextView) view.findViewById(R.id.coinPriceTest);
-        ImageButton tvBtn = (ImageButton) view.findViewById(R.id.imageAlarmBtn);
+        //TODO Image not shown..
+        ImageButton tvBtn = (ImageButton) view.findViewById(R.id.alarmBtnTemp);
 
         tvName.setText(coinArrayList.get(position).getName());
         tvCurrency.setText(coinArrayList.get(position).getCurrency());
-//        String convertToString = Double.toString(convertDouble);
         tvAmount.setText(coinArrayList.get(position).getAmount());
+        tvBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, "clicked", Toast.LENGTH_LONG).show();
+            }
+        });
 
         view.setTag(coinArrayList.get(position).getName());
 
         return view;
     }
-
 
     public void updateAdapter(List<Coin> tmp) {
 
@@ -62,6 +67,5 @@ public class CoinAdapter extends BaseAdapter {
         //and call notifyDataSetChanged
         notifyDataSetChanged();
     }
-
 
 }

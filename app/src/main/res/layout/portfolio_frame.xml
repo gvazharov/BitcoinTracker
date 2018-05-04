@@ -6,6 +6,6 @@
              android:id="@+id/container_portfolio"
              tools:ignore="MergeRootFrame"
              tools:context="at.ac.univie.hci.bitcointracker.portfolio.PortfolioActivity"
-             >
+        >
 
 </FrameLayout>

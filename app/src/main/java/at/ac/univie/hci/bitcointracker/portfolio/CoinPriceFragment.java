@@ -23,10 +23,10 @@ public class CoinPriceFragment extends Fragment {
     private List<Coin> coinList;
 
     /**
-            * onCreateView is invoked when this fragment is created and here I am initialising my TextViews
+     * onCreateView is invoked when this fragment is created and here I am initialising my TextViews
      * need for my layout
      *
-             * @param inflater
+     * @param inflater
      * @param container
      * @param savedInstanceState
      */

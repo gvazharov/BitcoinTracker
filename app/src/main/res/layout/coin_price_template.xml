@@ -22,10 +22,11 @@
     <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/alarm_btn_black"
-            android:id="@+id/imageAlarmBtn"
+            app:srcCompat="@drawable/ic_alarm_black_24dp"
+            android:id="@+id/alarmBtnTemp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="19dp"/>
 
     <LinearLayout
             android:layout_width="wrap_content"
@@ -40,7 +41,7 @@
                 android:text="$ "
                 android:textSize="20sp"
                 android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
         <TextView
                 android:id="@+id/coinPriceTest"
@@ -50,7 +51,7 @@
                 android:textSize="20sp"
                 android:textAppearance="?android:attr/textAppearanceButton"
                 android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
     </LinearLayout>
 
