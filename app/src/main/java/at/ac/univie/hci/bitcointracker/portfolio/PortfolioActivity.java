@@ -27,15 +27,10 @@ public class PortfolioActivity extends FragmentActivity {
             }
         }
 
-        CoinPriceFragment coinPriceFragment = new CoinPriceFragment();
-//        ChartPriceFragment chartPriceFragment = new ChartPriceFragment();
-        ManagePortfolioCoinsFragment manageCoin = new ManagePortfolioCoinsFragment();
-        ChartPriceFragment chartPriceFragment = new ChartPriceFragment();
-//        newAddCoin newAddCoin = new newAddCoin();
         getSupportFragmentManager()
                 .beginTransaction()
-//                .add(R.id.container_portfolio, coinPriceFragment)
-                .add(R.id.container_portfolio, new PieChartFragment())
+                .add(R.id.container_portfolio, new ChartPriceFragment())
+                .add(R.id.container_portfolio, new CoinPriceFragment())
                 .commit();
 
     }

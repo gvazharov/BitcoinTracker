@@ -46,7 +46,6 @@ public class CoinAdapter extends BaseAdapter {
 
         tvName.setText(coinArrayList.get(position).getName());
         tvCurrency.setText(coinArrayList.get(position).getCurrency());
-
 //        String convertToString = Double.toString(convertDouble);
         tvAmount.setText(coinArrayList.get(position).getAmount());
 

@@ -63,8 +63,7 @@ public class PieChartFragment extends Fragment {
             }
         }
 
-
-        PieDataSet dataSet = new PieDataSet(pieEntries,"      Crypto Coins");
+        PieDataSet dataSet = new PieDataSet(pieEntries, "      Crypto Coins");
         dataSet.setSliceSpace(5f);
         dataSet.setSelectionShift(0f);
         dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
