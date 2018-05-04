@@ -34,7 +34,7 @@ public class PortfolioActivity extends FragmentActivity {
         getSupportFragmentManager()
                 .beginTransaction()
 //                .add(R.id.container_portfolio, coinPriceFragment)
-                .add(R.id.container_portfolio, manageCoin)
+                .add(R.id.container_portfolio, coinPriceFragment)
                 .commit();
 
     }

@@ -2,15 +2,25 @@ package at.ac.univie.hci.bitcointracker.portfolio;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import at.ac.univie.hci.bitcointracker.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CoinPriceFragment extends Fragment {
 
-    private TextView test;
+    private ListView listView;
+    private Button addCoin;
+    private PortfolioMemory portfolioMemory;
+    private CoinAdapter coinAdapter;
+    private List<Coin> coinList;
 
     /**
             * onCreateView is invoked when this fragment is created and here I am initialising my TextViews
@@ -24,9 +34,43 @@ public class CoinPriceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.coin_price_fragment, container, false);
-        test = (TextView) rootView.findViewById(R.id.TESTCOIN);
+        portfolioMemory = new PortfolioMemory();
+
+        addCoin = (Button) rootView.findViewById(R.id.addCoinPriceBtn);
+        listView = (ListView) rootView.findViewById(R.id.viewListCoinPrice);
+
+        coinList = new ArrayList<>();
+        ArrayList<Coin> favorites = portfolioMemory.getFavorites(getContext());
+
+        if (favorites != null) {
+            coinList = portfolioMemory.getFavorites(getContext());
+        }
+
+        coinAdapter = new CoinAdapter(getContext(), coinList);
+        listView.setAdapter(coinAdapter);
 
         return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        addCoin = (Button) getView().findViewById(
+                R.id.addCoinPriceBtn);
+        addCoin.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                FragmentTransaction fragmentTransaction = getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container_portfolio, new ManagePortfolioCoinsFragment());
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
     }
 
 }
