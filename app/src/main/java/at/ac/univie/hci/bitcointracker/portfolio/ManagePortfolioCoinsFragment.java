@@ -22,6 +22,8 @@ public class ManagePortfolioCoinsFragment extends Fragment {
     private EditText coinName;
     private EditText coinAmount;
 
+    private PortfolioMemory portfolioMemory;
+
     /**
      * onCreateView is invoked when this fragment is created and here I am initialising my TextViews
      * need for my layout
@@ -35,6 +37,8 @@ public class ManagePortfolioCoinsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.manage_coin_fragment, container, false);
 
+        portfolioMemory = new PortfolioMemory();
+
         coinName = (EditText) rootView.findViewById(R.id.coinNameReal);
         coinAmount = (EditText) rootView.findViewById(R.id.coinAmountReal);
         addCoinBtn = (Button) rootView.findViewById(R.id.saveCoinBtn);
@@ -47,15 +51,14 @@ public class ManagePortfolioCoinsFragment extends Fragment {
         cryptoList.add("ECA");
         cryptoList.add("ABC");
 
-        coinList.add(new Coin("BTC", "$", "232.1"));
-        coinList.add(new Coin("LTC", "$", "2312"));
-        coinList.add(new Coin("ECA", "$", "23123"));
+        ArrayList<Coin> favorites = portfolioMemory.getFavorites(getContext());
 
+        if (favorites != null) {
+            coinList = portfolioMemory.getFavorites(getContext());
+        }
 
         coinAdapter = new CoinAdapter(getContext(), coinList);
         listView.setAdapter(coinAdapter);
-
-
         return rootView;
     }
 
@@ -84,7 +87,7 @@ public class ManagePortfolioCoinsFragment extends Fragment {
                 } else {
 
                     if (savedCoins.contains(getCoin)) {
-                        updateCoinAmount(getCoin,getAmount);
+                        updateCoinAmount(getCoin, getAmount);
                     } else renderCoinInput(getCoin, getAmount);
                 }
             }
@@ -92,18 +95,20 @@ public class ManagePortfolioCoinsFragment extends Fragment {
     }
 
 
-    private String updateCoinAmount(String name, String amount) {
+    private void updateCoinAmount(String name, String amount) {
         String updatedAmount = "";
         for (Coin aCoinList : coinList) {
             if (aCoinList.getName().equals(name)) {
+                //TODO Fix SharedPreferences
                 String previousAmount = aCoinList.getAmount();
                 Double value = Double.parseDouble(previousAmount) + Double.parseDouble(amount);
                 updatedAmount = String.valueOf(value);
                 aCoinList.setAmount(updatedAmount);
+                portfolioMemory.updateFavorites(getContext(), aCoinList);
                 coinAdapter.updateAdapter(coinList);
             }
         }
-        return updatedAmount;
+
     }
 
     private void renderCoinInput(String name, String amount) {
@@ -112,6 +117,7 @@ public class ManagePortfolioCoinsFragment extends Fragment {
         coin.setAmount(amount);
         coin.setCurrency("$");
         coinList.add(coin);
+        portfolioMemory.addFavorite(getContext(), coin);
         coinAdapter.updateAdapter(coinList);
     }
 
