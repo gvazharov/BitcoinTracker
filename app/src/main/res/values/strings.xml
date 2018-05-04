@@ -3,4 +3,13 @@
     <string name="portfolio">Portfolio</string>
     <string name="pie_chart">Value Distribution</string>
     <string name="manage_coins">Manage Coins</string>
+    <string name="buy">Buy</string>
+    <string name="sell">Sell</string>
+
+    <string-array name="coinMarkets">
+        <item>Coinbase</item>
+        <item>Bitbay</item>
+        <item>Binance</item>
+        <item>GDAX</item>
+    </string-array>
 </resources>
