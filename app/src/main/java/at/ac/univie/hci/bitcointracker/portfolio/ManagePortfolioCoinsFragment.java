@@ -48,7 +48,7 @@ public class ManagePortfolioCoinsFragment extends Fragment {
 
         cryptoList.add("BTC");
         cryptoList.add("LTC");
-        cryptoList.add("ECA");
+        cryptoList.add("ETH");
         cryptoList.add("ABC");
 
         ArrayList<Coin> favorites = portfolioMemory.getFavorites(getContext());
