@@ -42,6 +42,7 @@ public class CoinAdapter extends BaseAdapter {
         TextView tvName = (TextView) view.findViewById(R.id.nameTest);
         TextView tvCurrency = (TextView) view.findViewById(R.id.coinCurrencyTest);
         TextView tvAmount = (TextView) view.findViewById(R.id.coinPriceTest);
+        ImageButton tvBtn = (ImageButton) view.findViewById(R.id.imageAlarmBtn);
 
         tvName.setText(coinArrayList.get(position).getName());
         tvCurrency.setText(coinArrayList.get(position).getCurrency());
