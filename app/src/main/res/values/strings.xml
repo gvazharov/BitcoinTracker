@@ -5,7 +5,10 @@
     <string name="manage_coins">Manage Coins</string>
     <string name="buy">Buy</string>
     <string name="sell">Sell</string>
-
+    <integer name="bitcoin_price">9948</integer>
+    <integer name="litecoin_price">174</integer>
+    <integer name="ethereum_price">815</integer>
+    <integer name="abc_price">270</integer>
     <string-array name="coinMarkets">
         <item>Coinbase</item>
         <item>Bitbay</item>

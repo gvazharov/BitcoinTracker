@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import at.ac.univie.hci.bitcointracker.R;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class CoinPriceFragment extends Fragment {
     private ListView listView;
     private Button addCoin;
     private PortfolioMemory portfolioMemory;
-    private CoinAdapter coinAdapter;
+    private PriceAdapter priceAdapter;
     private List<Coin> coinList;
 
     /**
@@ -46,8 +45,8 @@ public class CoinPriceFragment extends Fragment {
             coinList = portfolioMemory.getFavorites(getContext());
         }
 
-        coinAdapter = new CoinAdapter(getContext(), coinList);
-        listView.setAdapter(coinAdapter);
+        priceAdapter = new PriceAdapter(getContext(), coinList);
+        listView.setAdapter(priceAdapter);
 
         return rootView;
     }

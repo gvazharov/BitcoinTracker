@@ -58,6 +58,8 @@ public class PortfolioMemory {
             for (Coin favorite : favorites) {
                 if (favorite.getName().equals(coin.getName())) {
                     favorite.setAmount(coin.getAmount());
+                    favorite.setPrice(coin.getPrice());
+                    favorite.setCurrency(coin.getCurrency());
                 }
             }
             saveFavorites(context, favorites);

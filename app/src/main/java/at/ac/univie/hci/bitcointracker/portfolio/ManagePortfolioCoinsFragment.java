@@ -20,7 +20,8 @@ import java.util.List;
 public class ManagePortfolioCoinsFragment extends Fragment {
 
     private SwipeMenuListView listView;
-    private CoinAdapter coinAdapter;
+    private PriceAdapter priceAdapter;
+    private AmountAdapter amountAdapter;
     private List<Coin> coinList;
     private ArrayList<String> cryptoList;
     private Button addCoinBtn;
@@ -64,8 +65,10 @@ public class ManagePortfolioCoinsFragment extends Fragment {
             coinList = portfolioMemory.getFavorites(getContext());
         }
 
-        coinAdapter = new CoinAdapter(getContext(), coinList);
-        listView.setAdapter(coinAdapter);
+//        priceAdapter = new PriceAdapter(getContext(), coinList);
+        amountAdapter = new AmountAdapter(getContext(), coinList);
+//        listView.setAdapter(priceAdapter);
+        listView.setAdapter(amountAdapter);
 
         /**
          * SwipeMenu Creator is used in order to swipe from right to left on one item from the list view and delete it
@@ -78,19 +81,19 @@ public class ManagePortfolioCoinsFragment extends Fragment {
                 // create "open" item
                 SwipeMenuItem openItem = new SwipeMenuItem(
                         getContext());
-                // set item background
-                openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
-                        0xCE)));
-                // set item width
-                openItem.setWidth(170);
-                // set item title
-                openItem.setTitle("Open");
-                // set item title fontsize
-                openItem.setTitleSize(18);
-                // set item title font color
-                openItem.setTitleColor(Color.WHITE);
-                // add to menu
-                menu.addMenuItem(openItem);
+//                // set item background
+//                openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
+//                        0xCE)));
+//                // set item width
+//                openItem.setWidth(170);
+//                // set item title
+//                openItem.setTitle("DELTE");
+//                // set item title fontsize
+//                openItem.setTitleSize(18);
+//                // set item title font color
+//                openItem.setTitleColor(Color.WHITE);
+//                // add to menu
+//                menu.addMenuItem(openItem);
 
                 // create "delete" item
                 SwipeMenuItem deleteItem = new SwipeMenuItem(
@@ -101,7 +104,7 @@ public class ManagePortfolioCoinsFragment extends Fragment {
                 // set item width
                 deleteItem.setWidth(170);
                 // set a icon
-                deleteItem.setIcon(R.drawable.alarm_btn);
+                deleteItem.setIcon(R.drawable.trash_btn);
                 // add to menu
                 menu.addMenuItem(deleteItem);
             }
@@ -115,10 +118,17 @@ public class ManagePortfolioCoinsFragment extends Fragment {
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-                        Toast.makeText(getContext(), "ITEM CLICKED ==" + index, Toast.LENGTH_LONG).show();
+                        String coinName =  amountAdapter.getItemName(position);
+                        for(Coin aCoinList: coinList){
+                            if(aCoinList.getName().equals(coinName)){
+//                                coinList.remove(aCoinList);
+//                                amountAdapter = new AmountAdapter(getContext(), coinList);
+//                                listView.setAdapter(amountAdapter);
+                            }
+                        }
                         break;
                     case 1:
-                        Toast.makeText(getContext(), "ITEM CLICKED2 ==" + index, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "ITEM CLICKED2 ==" + position, Toast.LENGTH_LONG).show();
                         break;
                 }
                 // false : close the menu; true : not close the menu
@@ -166,13 +176,16 @@ public class ManagePortfolioCoinsFragment extends Fragment {
         String updatedAmount = "";
         for (Coin aCoinList : coinList) {
             if (aCoinList.getName().equals(name)) {
-                //TODO Fix SharedPreferences
                 String previousAmount = aCoinList.getAmount();
                 Double value = Double.parseDouble(previousAmount) + Double.parseDouble(amount);
                 updatedAmount = String.valueOf(value);
                 aCoinList.setAmount(updatedAmount);
                 portfolioMemory.updateFavorites(getContext(), aCoinList);
-                coinAdapter.updateAdapter(coinList);
+//                priceAdapter.updateAdapter(coinList);
+                calculatePriceAmount(name,updatedAmount, aCoinList);
+                amountAdapter.updateAdapter(coinList);
+//                listView.setAdapter(priceAdapter);
+                  listView.setAdapter(amountAdapter);
             }
         }
 
@@ -183,9 +196,55 @@ public class ManagePortfolioCoinsFragment extends Fragment {
         coin.setName(name);
         coin.setAmount(amount);
         coin.setCurrency("$");
+        coin.setPrice("0");
+
         coinList.add(coin);
         portfolioMemory.addFavorite(getContext(), coin);
-        coinAdapter.updateAdapter(coinList);
+        calculatePriceAmount(name, amount, coin);
+//        priceAdapter.updateAdapter(coinList);
+        amountAdapter.updateAdapter(coinList);
+//        listView.setAdapter(priceAdapter);
+          listView.setAdapter(amountAdapter);
     }
 
+    private void calculatePriceAmount(String name, String amount, Coin coin){
+            switch (name) {
+                case "BTC": {
+                    int btcPrice = 9948;
+                    Double amout = Double.parseDouble(amount);
+                    Double priceAmount = btcPrice * amout;
+                    coin.setPrice(String.valueOf(priceAmount));
+                    portfolioMemory.updateFavorites(getContext(), coin);
+                    Toast.makeText(getContext(),"MY PRICE IS == " + coin.getPrice(), Toast.LENGTH_LONG).show();
+                    break;
+                }
+                case "LTC": {
+                    int ltcPrice = 174;
+                    Double amout = Double.parseDouble(amount);
+                    Double priceAmount = ltcPrice * amout;
+                    coin.setPrice(String.valueOf(priceAmount));
+                    portfolioMemory.updateFavorites(getContext(), coin);
+                    break;
+                }
+                case "ETH": {
+                    int ethPrice = 815;
+                    Double amout = Double.parseDouble(amount);
+                    Double priceAmount = ethPrice * amout;
+                    coin.setPrice(String.valueOf(priceAmount));
+                    portfolioMemory.updateFavorites(getContext(), coin);
+                    break;
+                }
+                case "ABC": {
+                    int abcPrice = 250;
+                    Double amout = Double.parseDouble(amount);
+                    Double priceAmount = abcPrice * amout;
+                    coin.setPrice(String.valueOf(priceAmount));
+                    portfolioMemory.updateFavorites(getContext(), coin);
+                    break;
+                }
+                default:
+                    Toast.makeText(getContext(), "Problem in calculating PriceAmount", Toast.LENGTH_LONG).show();
+                    break;
+            }
+    }
 }

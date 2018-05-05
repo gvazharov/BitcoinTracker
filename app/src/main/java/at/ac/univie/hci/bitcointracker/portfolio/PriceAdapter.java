@@ -9,13 +9,13 @@ import at.ac.univie.hci.bitcointracker.R;
 
 import java.util.List;
 
-public class CoinAdapter extends BaseAdapter {
+public class PriceAdapter extends BaseAdapter {
 
     private List<Coin> coinArrayList;
     private Context mContext;
 
 
-    public CoinAdapter(Context mContext, List<Coin> coinArrayList) {
+    public PriceAdapter(Context mContext, List<Coin> coinArrayList) {
         this.mContext = mContext;
         this.coinArrayList = coinArrayList;
     }
@@ -41,13 +41,13 @@ public class CoinAdapter extends BaseAdapter {
 
         TextView tvName = (TextView) view.findViewById(R.id.nameTest);
         TextView tvCurrency = (TextView) view.findViewById(R.id.coinCurrencyTest);
-        TextView tvAmount = (TextView) view.findViewById(R.id.coinPriceTest);
+        TextView tvPrice = (TextView) view.findViewById(R.id.coinPriceTest);
         //TODO Image not shown..
         ImageButton tvBtn = (ImageButton) view.findViewById(R.id.alarmBtnTemp);
 
         tvName.setText(coinArrayList.get(position).getName());
         tvCurrency.setText(coinArrayList.get(position).getCurrency());
-        tvAmount.setText(coinArrayList.get(position).getAmount());
+        tvPrice.setText(coinArrayList.get(position).getPrice());
         tvBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
