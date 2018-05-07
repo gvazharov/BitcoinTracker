@@ -79,7 +79,7 @@
                     android:text="@string/buy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/button"/>
+                    android:id="@+id/buyBtnFees"/>
 
             <TextView
                     android:text="     0.21%"
@@ -98,7 +98,7 @@
                     android:text="@string/sell"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/button2"/>
+                    android:id="@+id/sellBtnFees"/>
 
             <TextView
                     android:text="     0.45%"

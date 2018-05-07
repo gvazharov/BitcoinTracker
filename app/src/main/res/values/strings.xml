@@ -5,6 +5,10 @@
     <string name="manage_coins">Manage Coins</string>
     <string name="buy">Buy</string>
     <string name="sell">Sell</string>
+    <string name="coinBaseUrl">http://www.coinbase.com</string>
+    <string name="bitBayUrl">http://bitbay.net</string>
+    <string name="binanceUrl">http://binance.com</string>
+    <string name="gdaxUrl">http://www.gdax.com/</string>
     <integer name="bitcoin_price">9948</integer>
     <integer name="litecoin_price">174</integer>
     <integer name="ethereum_price">815</integer>
