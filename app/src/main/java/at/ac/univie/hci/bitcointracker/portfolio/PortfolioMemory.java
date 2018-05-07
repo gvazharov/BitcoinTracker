@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class PortfolioMemory {
 
 
@@ -24,7 +26,7 @@ public class PortfolioMemory {
         SharedPreferences.Editor editor;
 
         settings = context.getSharedPreferences(PREFS_NAME,
-                Context.MODE_PRIVATE);
+                MODE_PRIVATE);
         editor = settings.edit();
 
         Gson gson = new Gson();
@@ -71,7 +73,7 @@ public class PortfolioMemory {
         List<Coin> favorites;
 
         settings = context.getSharedPreferences(PREFS_NAME,
-                Context.MODE_PRIVATE);
+                MODE_PRIVATE);
 
         if (settings.contains(COINS)) {
             String jsonFavorites = settings.getString(COINS, null);
@@ -85,6 +87,44 @@ public class PortfolioMemory {
             return null;
 
         return (ArrayList<Coin>) favorites;
+    }
+
+
+    public void saveTotal(Context context, Coin coin){
+        SharedPreferences  totalPrefs = context.getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+        SharedPreferences.Editor  totalEditor = totalPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(coin);
+        totalEditor.putString("Total", json);
+        totalEditor.commit();
+    }
+
+
+    public Coin getTotal(Context context){
+        SharedPreferences  totalPrefs = context.getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = totalPrefs.getString("Total","");
+        Coin total = gson.fromJson(json,Coin.class);
+        return total;
+    }
+
+    public void updateTotal(Context context){
+
+        Coin oldTotal = getTotal(context);
+        ArrayList<Coin> coins = getFavorites(context);
+        Double coinAmount = 0.0;
+        Double coinPrice = 0.0;
+
+        if(oldTotal != null || coins != null){
+            for (Coin coin : coins) {
+                coinAmount += Double.parseDouble(coin.getAmount());
+                coinPrice += Double.parseDouble(coin.getPrice());
+            }
+
+            oldTotal.setAmount(String.valueOf(coinAmount));
+            oldTotal.setPrice(String.valueOf(coinPrice));
+        }
+        saveTotal(context, oldTotal);
     }
 
 }

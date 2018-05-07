@@ -30,6 +30,7 @@ public class CoinPriceFragment extends Fragment {
      * @param savedInstanceState
      */
     @Override
+    @SuppressWarnings("Duplicates")
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.coin_price_fragment, container, false);
@@ -41,8 +42,18 @@ public class CoinPriceFragment extends Fragment {
         coinList = new ArrayList<>();
         ArrayList<Coin> favorites = portfolioMemory.getFavorites(getContext());
 
-        if (favorites != null) {
-            coinList = portfolioMemory.getFavorites(getContext());
+        if(favorites == null){
+            Coin total = new Coin();
+            total.setCurrency("$");
+            total.setPrice("0");
+            total.setAmount("0");
+            total.setName("TOTAL");
+            portfolioMemory.saveTotal(getContext(),total);
+            coinList.add(portfolioMemory.getTotal(getContext()));
+
+        }else {
+            coinList.add(portfolioMemory.getTotal(getContext()));
+            coinList.addAll(favorites);
         }
 
         priceAdapter = new PriceAdapter(getContext(), coinList);

@@ -27,6 +27,8 @@ public class ManagePortfolioCoinsFragment extends Fragment {
     private Button addCoinBtn;
     private EditText coinName;
     private EditText coinAmount;
+    private Double sum = 0.0;
+    private Double amnt = 0.0;
 
     private PortfolioMemory portfolioMemory;
 
@@ -39,6 +41,7 @@ public class ManagePortfolioCoinsFragment extends Fragment {
      * @param savedInstanceState
      */
     @Override
+    @SuppressWarnings("Duplicates")
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.manage_coin_fragment, container, false);
@@ -61,11 +64,21 @@ public class ManagePortfolioCoinsFragment extends Fragment {
         //gets the portfolio coins from sharedPreferences
         ArrayList<Coin> favorites = portfolioMemory.getFavorites(getContext());
 
-        if (favorites != null) {
-            coinList = portfolioMemory.getFavorites(getContext());
+        if(favorites == null){
+            Coin total = new Coin();
+            total.setCurrency("$");
+            total.setPrice("0");
+            total.setAmount("0");
+            total.setName("TOTAL");
+            portfolioMemory.saveTotal(getContext(),total);
+            coinList.add(portfolioMemory.getTotal(getContext()));
+
+        }else {
+            coinList.add(portfolioMemory.getTotal(getContext()));
+            coinList.addAll(favorites);
         }
 
-//        priceAdapter = new PriceAdapter(getContext(), coinList);
+        priceAdapter = new PriceAdapter(getContext(), coinList);
         amountAdapter = new AmountAdapter(getContext(), coinList);
 //        listView.setAdapter(priceAdapter);
         listView.setAdapter(amountAdapter);
@@ -181,7 +194,9 @@ public class ManagePortfolioCoinsFragment extends Fragment {
                 updatedAmount = String.valueOf(value);
                 aCoinList.setAmount(updatedAmount);
                 portfolioMemory.updateFavorites(getContext(), aCoinList);
-//                priceAdapter.updateAdapter(coinList);
+                //TODO FIX updateTotal to view instant on change
+                portfolioMemory.updateTotal(getContext());
+                priceAdapter.updateAdapter(coinList);
                 calculatePriceAmount(name,updatedAmount, aCoinList);
                 amountAdapter.updateAdapter(coinList);
 //                listView.setAdapter(priceAdapter);
@@ -200,8 +215,10 @@ public class ManagePortfolioCoinsFragment extends Fragment {
 
         coinList.add(coin);
         portfolioMemory.addFavorite(getContext(), coin);
+        portfolioMemory.updateTotal(getContext());
+        amountAdapter.updateAdapter(coinList);
         calculatePriceAmount(name, amount, coin);
-//        priceAdapter.updateAdapter(coinList);
+        priceAdapter.updateAdapter(coinList);
         amountAdapter.updateAdapter(coinList);
 //        listView.setAdapter(priceAdapter);
           listView.setAdapter(amountAdapter);
