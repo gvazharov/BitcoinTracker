@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">BitcoinTracker</string>
+    <string-array name="currencies">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+        <item>KRW</item>
+    </string-array>
 </resources>
