@@ -1,12 +1,11 @@
 <resources>
     <string name="app_name">BitcoinTracker</string>
-<<<<<<< HEAD
     <string-array name="currencies">
         <item>USD</item>
         <item>EUR</item>
         <item>GBP</item>
         <item>KRW</item>
-=======
+    </string-array>>
     <string name="portfolio">Portfolio</string>
     <string name="pie_chart">Value Distribution</string>
     <string name="manage_coins">Manage Coins</string>
@@ -25,6 +24,5 @@
         <item>Bitbay</item>
         <item>Binance</item>
         <item>GDAX</item>
->>>>>>> portfolio_fragments
     </string-array>
 </resources>
