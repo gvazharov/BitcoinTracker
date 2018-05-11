@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.app.Fragment;
+import at.ac.univie.hci.bitcointracker.portfolio.ChartPriceFragment;
 import at.ac.univie.hci.bitcointracker.portfolio.CoinPriceFragment;
 import at.ac.univie.hci.bitcointracker.portfolio.ManagePortfolioCoinsFragment;
 
@@ -86,32 +87,25 @@ public class DrawerActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fragment = null;
-        Class fragmentClass = null;
-        if (id == R.id.portfolio_menu) {
-            fragmentClass = CoinPriceFragment.class;
-;        }
-        else if (id == R.id.settings_menu) {
-            Intent intent = new Intent(DrawerActivity.this, SettingsActivity.class );
-            startActivity(intent);
-        }
-//        else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
-        try{
-            fragment = (Fragment) fragmentClass.newInstance();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.container_portfolio, fragment).commit();
+        if (id == R.id.portfolio_menu) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.burger_frame, new ChartPriceFragment());
+            ft.replace(R.id.burger_frame_up, new CoinPriceFragment());
+            ft.commit();
+
+        } else if (id == R.id.manage_menu) {
+            Intent intent = new Intent(DrawerActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.fees_menu) {
+
+        } else if (id == R.id.news_menu) {
+
+        } else if (id == R.id.aler_menu) {
+
+        } else if (id == R.id.settings_menu) {
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
