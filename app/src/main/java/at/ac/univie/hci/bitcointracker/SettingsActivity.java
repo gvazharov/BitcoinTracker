@@ -2,25 +2,24 @@ package at.ac.univie.hci.bitcointracker;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.*;
 
 
 public class SettingsActivity extends AppCompatActivity{
-    Switch switchButton, switchButton2, switchButton3;
-    TextView textView, textView2, textView3;
+    Switch switchButton, switchButton2;
+    TextView textView, textView2;
     String switchOn = "Switch is ON";
     String switchOff = "Switch is OFF";
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.settings_activity);
 
         // For first switch button
-        switchButton = (Switch) findViewById(R.id.switchButton);
-        textView = (TextView) findViewById(R.id.textView);
+        switchButton = (Switch) findViewById(R.id.switchButton_1);
+        textView = (TextView) findViewById(R.id.textView_1);
 
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -38,8 +37,8 @@ public class SettingsActivity extends AppCompatActivity{
         }
 
         // for second switch button
-        switchButton2 = (Switch) findViewById(R.id.switchButton2);
-        textView2 = (TextView) findViewById(R.id.textView2);
+        switchButton2 = (Switch) findViewById(R.id.switchButton_2);
+        textView2 = (TextView) findViewById(R.id.textView_2);
 
         switchButton2.setChecked(false);
         switchButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -57,26 +56,26 @@ public class SettingsActivity extends AppCompatActivity{
         } else {
             textView2.setText(switchOff);
         }
-        // for third button
-        switchButton3 = (Switch) findViewById(R.id.switchButton3);
-        textView3 = (TextView) findViewById(R.id.textView3);
 
-        switchButton3.setChecked(false);
-        switchButton3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        Spinner currencies= (Spinner) findViewById(R.id.spinner_settings);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,
+                getResources().getStringArray(R.array.currencies));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        currencies.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
-                if (bChecked) {
-                    textView3.setText(switchOn);
-                } else {
-                    textView3.setText(switchOff);
-                }
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
         });
-        if (switchButton3.isChecked()) {
-            textView3.setText(switchOn);
-        } else {
-            textView3.setText(switchOff);
-        }
+        currencies.setAdapter(adapter);
     }
 
 

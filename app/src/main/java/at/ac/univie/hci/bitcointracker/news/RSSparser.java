@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -23,7 +22,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class RSSparser extends AsyncTask<Void,Void,Void> {
 
     Context context;
-    String address = "https://de.cointelegraph.com/rss.xml";
+      String address = "https://www.coindesk.com/feed/";
     ProgressDialog progressDialog;
     ArrayList<TestArtikel> feedItems;
     RecyclerView recyclerView;

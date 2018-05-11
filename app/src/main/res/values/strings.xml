@@ -5,7 +5,10 @@
         <item>EUR</item>
         <item>GBP</item>
         <item>KRW</item>
-    </string-array>>
+        <item>JPY</item>
+        <item>CNY</item>
+        <item>INR</item>
+    </string-array>
     <string name="portfolio">Portfolio</string>
     <string name="pie_chart">Value Distribution</string>
     <string name="manage_coins">Manage Coins</string>
@@ -25,4 +28,6 @@
         <item>Binance</item>
         <item>GDAX</item>
     </string-array>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
