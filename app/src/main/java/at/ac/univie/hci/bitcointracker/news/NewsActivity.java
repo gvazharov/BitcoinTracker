@@ -1,12 +1,10 @@
-package at.ac.univie.hci.bitcointracker;
+package at.ac.univie.hci.bitcointracker.news;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+
+import at.ac.univie.hci.bitcointracker.R;
 
 public class NewsActivity extends AppCompatActivity {
     RecyclerView recyclerView;

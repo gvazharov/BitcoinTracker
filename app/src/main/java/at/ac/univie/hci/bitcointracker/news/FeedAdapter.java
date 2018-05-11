@@ -1,4 +1,4 @@
-package at.ac.univie.hci.bitcointracker;
+package at.ac.univie.hci.bitcointracker.news;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import at.ac.univie.hci.bitcointracker.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package at.ac.univie.hci.bitcointracker;
+package at.ac.univie.hci.bitcointracker.news;
 
 public class TestArtikel {
 

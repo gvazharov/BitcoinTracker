@@ -1,4 +1,4 @@
-package at.ac.univie.hci.bitcointracker.portfolio;
+package at.ac.univie.hci.bitcointracker;
 
 import android.app.Activity;
 import android.app.ListActivity;
