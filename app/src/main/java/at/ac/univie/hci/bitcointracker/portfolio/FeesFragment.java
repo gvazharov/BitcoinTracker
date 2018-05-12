@@ -1,25 +1,21 @@
 package at.ac.univie.hci.bitcointracker.portfolio;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import at.ac.univie.hci.bitcointracker.R;
 
-public class FeesFragment extends Fragment {
 
+public class FeesFragment extends Fragment {
 
     private Button buyBtn;
     private Button sellBtn;
     private Integer coinMarket = 0;
-
-
     /**
      * onCreateView is invoked when this fragment is created and here I am initialising my TextViews
      * need for my layout
@@ -37,6 +33,7 @@ public class FeesFragment extends Fragment {
         final TextView buyPercent = (TextView) rootView.findViewById(R.id.buyPercent);
         buyBtn = (Button) rootView.findViewById(R.id.buyBtnFees);
         sellBtn = (Button) rootView.findViewById(R.id.sellBtnFees);
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_expandable_list_item_1,
                 getResources().getStringArray(R.array.coinMarkets));

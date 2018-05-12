@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
-
 public class SettingsActivity extends AppCompatActivity{
     Switch switchButton, switchButton2;
     TextView textView, textView2;
@@ -16,6 +15,7 @@ public class SettingsActivity extends AppCompatActivity{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
+//        getSupportActionBar().setTitle("Settings");
 
         // For first switch button
         switchButton = (Switch) findViewById(R.id.switchButton_1);

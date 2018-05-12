@@ -1,7 +1,9 @@
 package at.ac.univie.hci.bitcointracker.portfolio;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import at.ac.univie.hci.bitcointracker.DrawerActivity;
 import at.ac.univie.hci.bitcointracker.R;
 
 /**
@@ -27,11 +29,34 @@ public class PortfolioActivity extends FragmentActivity {
             }
         }
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.container_portfolio, new ChartPriceFragment())
-                .add(R.id.container_portfolio, new CoinPriceFragment())
-                .commit();
+        Intent intent = getIntent();
+        String fragmentToStart = intent.getExtras().getString("FragmentToOpen");
+
+        switch (fragmentToStart) {
+            case "start_fragment":
+
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.container_portfolio, new ChartPriceFragment())
+                        .add(R.id.container_portfolio, new CoinPriceFragment())
+                        .commit();
+                break;
+            case "manage_fragment":
+//                getActionBar().setTitle("Manage Coins");
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.container_portfolio, new ManagePortfolioCoinsFragment())
+//                    .add(R.id.container_portfolio, new CoinPriceFragment())
+                        .commit();
+                break;
+            case "fee_fragment":
+//                getActionBar().setTitle("Fees");
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.container_portfolio, new FeesFragment())
+                        .commit();
+                break;
+        }
 
     }
 
