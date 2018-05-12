@@ -45,7 +45,6 @@ public class PriceAdapter extends BaseAdapter {
         TextView tvName = (TextView) view.findViewById(R.id.nameTest);
         TextView tvCurrency = (TextView) view.findViewById(R.id.coinCurrencyTest);
         TextView tvPrice = (TextView) view.findViewById(R.id.coinPriceTest);
-        //TODO Image not shown..
         ImageButton tvBtn = (ImageButton) view.findViewById(R.id.alarmBtnTemp);
         final String name = coinArrayList.get(position).getName();
         tvName.setText(coinArrayList.get(position).getName());

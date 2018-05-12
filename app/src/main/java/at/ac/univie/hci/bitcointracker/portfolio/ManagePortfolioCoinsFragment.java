@@ -232,7 +232,7 @@ public class ManagePortfolioCoinsFragment extends Fragment {
                     Double priceAmount = btcPrice * amout;
                     coin.setPrice(String.valueOf(priceAmount));
                     portfolioMemory.updateFavorites(getContext(), coin);
-                    Toast.makeText(getContext(),"MY PRICE IS == " + coin.getPrice(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getContext(),"MY PRICE IS == " + coin.getPrice(), Toast.LENGTH_LONG).show();
                     break;
                 }
                 case "LTC": {
