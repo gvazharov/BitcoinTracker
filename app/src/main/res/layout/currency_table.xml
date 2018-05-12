@@ -8,7 +8,7 @@
         android:layout_width="70px"
         android:layout_height="70px"
         android:layout_marginLeft="4px"
-        android:layout_marginRight="136px"
+        android:layout_marginRight="50px"
         android:layout_marginTop="4px"
         android:src="@drawable/alarm_btn_black" >
     </ImageView>
@@ -20,7 +20,7 @@
         android:text="@+id/label"
         android:textSize="70px"
         android:layout_marginLeft="4px"
-        android:layout_marginRight="136px"
+        android:layout_marginRight="100px"
         android:layout_marginTop="4px">
     </TextView>
 
@@ -31,7 +31,7 @@
         android:text="@+id/label"
         android:textSize="70px"
         android:layout_marginLeft="4px"
-        android:layout_marginRight="260px"
+        android:layout_marginRight="0px"
         android:layout_marginTop="4px">
     </TextView>
 
