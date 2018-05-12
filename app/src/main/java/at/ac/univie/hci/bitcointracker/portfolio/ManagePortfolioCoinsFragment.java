@@ -1,5 +1,6 @@
 package at.ac.univie.hci.bitcointracker.portfolio;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -8,7 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import at.ac.univie.hci.bitcointracker.AlertActivity;
+import at.ac.univie.hci.bitcointracker.DrawerActivity;
 import at.ac.univie.hci.bitcointracker.R;
+import at.ac.univie.hci.bitcointracker.SettingsActivity;
+import at.ac.univie.hci.bitcointracker.news.NewsActivity;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
@@ -27,6 +32,14 @@ public class ManagePortfolioCoinsFragment extends Fragment {
     private Button addCoinBtn;
     private EditText coinName;
     private EditText coinAmount;
+    private ImageButton pBtn;
+    private ImageButton wBtn;
+    private ImageButton fBtn;
+    private ImageButton nBtn;
+    private ImageButton aBtn;
+    private ImageButton sBtn;
+
+
     private Double sum = 0.0;
     private Double amnt = 0.0;
 
@@ -52,6 +65,12 @@ public class ManagePortfolioCoinsFragment extends Fragment {
         coinAmount = (EditText) rootView.findViewById(R.id.coinAmountReal);
         addCoinBtn = (Button) rootView.findViewById(R.id.saveCoinBtn);
         listView = (SwipeMenuListView) rootView.findViewById(R.id.listViewCoin);
+        pBtn = (ImageButton) rootView.findViewById(R.id.pBtn_Manage);
+        wBtn = (ImageButton) rootView.findViewById(R.id.wBtn_Manage);
+        fBtn = (ImageButton) rootView.findViewById(R.id.fBtn_Manage);
+        nBtn = (ImageButton) rootView.findViewById(R.id.nBtn_feed);
+        aBtn = (ImageButton) rootView.findViewById(R.id.aBtn_Mnage);
+        sBtn = (ImageButton) rootView.findViewById(R.id.sBtn_Manage);
         coinList = new ArrayList<>();
         cryptoList = new ArrayList<>();
 
@@ -182,6 +201,53 @@ public class ManagePortfolioCoinsFragment extends Fragment {
                 }
             }
         });
+
+        pBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), PortfolioActivity.class);
+                intent.putExtra("FragmentToOpen", "start_fragment");
+                startActivity(intent);
+            }
+        });
+        wBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), PortfolioActivity.class);
+                intent.putExtra("FragmentToOpen", "manage_fragment");
+                startActivity(intent);
+            }
+        });
+        fBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), PortfolioActivity.class);
+                intent.putExtra("FragmentToOpen", "fee_fragment");
+                startActivity(intent);
+            }
+        });
+        nBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), NewsActivity.class);
+                startActivity(intent);
+            }
+        });
+        aBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AlertActivity.class);
+                startActivity(intent);
+            }
+        });
+        sBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 

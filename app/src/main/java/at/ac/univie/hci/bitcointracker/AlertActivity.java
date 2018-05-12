@@ -5,15 +5,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +13,8 @@ import java.util.Map;
 
 import at.ac.univie.hci.bitcointracker.MainActivity;
 import at.ac.univie.hci.bitcointracker.R;
+import at.ac.univie.hci.bitcointracker.news.NewsActivity;
+import at.ac.univie.hci.bitcointracker.portfolio.PortfolioActivity;
 
 public class AlertActivity extends Activity
 {
@@ -28,6 +22,13 @@ public class AlertActivity extends Activity
     private ArrayList<Map<String, String>> list;
     private ListView listview;
     private String crypto;
+
+    private ImageButton pBtn;
+    private ImageButton wBtn;
+    private ImageButton fBtn;
+    private ImageButton nBtn;
+    private ImageButton aBtn;
+    private ImageButton sBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,15 @@ public class AlertActivity extends Activity
         crypto = intent.getStringExtra("crypto");
         Spinner currencies=findViewById(R.id.currencies);
         TextView addAlert =findViewById(R.id.addAlert);
+
+        pBtn = (ImageButton) findViewById(R.id.pBtn_A);
+        wBtn = (ImageButton) findViewById(R.id.wBtn_A);
+        fBtn = (ImageButton) findViewById(R.id.fBtn_A);
+        nBtn = (ImageButton) findViewById(R.id.nBtn_A);
+        aBtn = (ImageButton) findViewById(R.id.aBtn_A);
+        sBtn = (ImageButton) findViewById(R.id.sBtn_A);
+
+
         addAlert.setText("Add alert for " + crypto);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,
@@ -68,6 +78,53 @@ public class AlertActivity extends Activity
                 R.layout.currency_table, from, to);
 
         listview.setAdapter(adapter1);
+
+
+        pBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PortfolioActivity.class);
+                intent.putExtra("FragmentToOpen", "start_fragment");
+                startActivity(intent);
+            }
+        });
+        wBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PortfolioActivity.class);
+                intent.putExtra("FragmentToOpen", "manage_fragment");
+                startActivity(intent);
+            }
+        });
+        fBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PortfolioActivity.class);
+                intent.putExtra("FragmentToOpen", "fee_fragment");
+                startActivity(intent);
+            }
+        });
+        nBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), NewsActivity.class);
+                startActivity(intent);
+            }
+        });
+        aBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AlertActivity.class);
+                startActivity(intent);
+            }
+        });
+        sBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

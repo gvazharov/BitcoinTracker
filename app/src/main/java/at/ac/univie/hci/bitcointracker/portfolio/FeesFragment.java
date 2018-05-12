@@ -8,7 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import at.ac.univie.hci.bitcointracker.AlertActivity;
 import at.ac.univie.hci.bitcointracker.R;
+import at.ac.univie.hci.bitcointracker.SettingsActivity;
+import at.ac.univie.hci.bitcointracker.news.NewsActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class FeesFragment extends Fragment {
@@ -16,6 +22,16 @@ public class FeesFragment extends Fragment {
     private Button buyBtn;
     private Button sellBtn;
     private Integer coinMarket = 0;
+    private List<Coin> coinList;
+    private PortfolioMemory portfolioMemory;
+    private PriceAdapter priceAdapter;
+    private ImageButton pBtn;
+    private ImageButton wBtn;
+    private ImageButton fBtn;
+    private ImageButton nBtn;
+    private ImageButton aBtn;
+    private ImageButton sBtn;
+
     /**
      * onCreateView is invoked when this fragment is created and here I am initialising my TextViews
      * need for my layout
@@ -31,8 +47,16 @@ public class FeesFragment extends Fragment {
         Spinner feesMarkets = (Spinner) rootView.findViewById(R.id.marketFees);
         final TextView sellPercent = (TextView) rootView.findViewById(R.id.sellPercent);
         final TextView buyPercent = (TextView) rootView.findViewById(R.id.buyPercent);
+        ListView listView = (ListView) rootView.findViewById(R.id.fees_list);
         buyBtn = (Button) rootView.findViewById(R.id.buyBtnFees);
         sellBtn = (Button) rootView.findViewById(R.id.sellBtnFees);
+
+        pBtn = (ImageButton) rootView.findViewById(R.id.pBtn_Fee);
+        wBtn = (ImageButton) rootView.findViewById(R.id.wBtn_Fee);
+        fBtn = (ImageButton) rootView.findViewById(R.id.fBtn_Fee);
+        nBtn = (ImageButton) rootView.findViewById(R.id.nBtn_Fee);
+        aBtn = (ImageButton) rootView.findViewById(R.id.aBtn_Fee);
+        sBtn = (ImageButton) rootView.findViewById(R.id.sBtn_Fee);
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_expandable_list_item_1,
@@ -74,6 +98,19 @@ public class FeesFragment extends Fragment {
         // Apply the adapter to the spinner
         feesMarkets.setAdapter(adapter);
 
+        portfolioMemory = new PortfolioMemory();
+        coinList = new ArrayList<>();
+        ArrayList<Coin> favorites = portfolioMemory.getFavorites(getContext());
+
+        if(favorites == null){
+
+        }else {
+            coinList.add(portfolioMemory.getTotal(getContext()));
+            coinList.addAll(favorites);
+        }
+
+        priceAdapter = new PriceAdapter(getContext(), coinList);
+        listView.setAdapter(priceAdapter);
 
         return rootView;
     }
@@ -128,6 +165,52 @@ public class FeesFragment extends Fragment {
                     Intent openBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.gdax.com"));
                     startActivity(openBrowser);
                 }
+            }
+        });
+
+        pBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), PortfolioActivity.class);
+                intent.putExtra("FragmentToOpen", "start_fragment");
+                startActivity(intent);
+            }
+        });
+        wBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), PortfolioActivity.class);
+                intent.putExtra("FragmentToOpen", "manage_fragment");
+                startActivity(intent);
+            }
+        });
+        fBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), PortfolioActivity.class);
+                intent.putExtra("FragmentToOpen", "fee_fragment");
+                startActivity(intent);
+            }
+        });
+        nBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), NewsActivity.class);
+                startActivity(intent);
+            }
+        });
+        aBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AlertActivity.class);
+                startActivity(intent);
+            }
+        });
+        sBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SettingsActivity.class);
+                startActivity(intent);
             }
         });
 
