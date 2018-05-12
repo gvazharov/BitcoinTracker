@@ -1,9 +1,12 @@
 package at.ac.univie.hci.bitcointracker.portfolio;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+
+import at.ac.univie.hci.bitcointracker.AlertActivity;
 import at.ac.univie.hci.bitcointracker.R;
 
 
@@ -44,14 +47,16 @@ public class PriceAdapter extends BaseAdapter {
         TextView tvPrice = (TextView) view.findViewById(R.id.coinPriceTest);
         //TODO Image not shown..
         ImageButton tvBtn = (ImageButton) view.findViewById(R.id.alarmBtnTemp);
-
+        final String name = coinArrayList.get(position).getName();
         tvName.setText(coinArrayList.get(position).getName());
         tvCurrency.setText(coinArrayList.get(position).getCurrency());
         tvPrice.setText(coinArrayList.get(position).getPrice());
         tvBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "clicked", Toast.LENGTH_LONG).show();
+                Intent i=new Intent(mContext, AlertActivity.class);
+                i.putExtra("crypto", name); //Optional parameters
+                mContext.startActivity(i);
             }
         });
 
