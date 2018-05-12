@@ -5,11 +5,15 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,12 +24,21 @@ import at.ac.univie.hci.bitcointracker.R;
 
 public class AlertActivity extends Activity
 {
+    private String selectedCurrency;
+    private ArrayList<Map<String, String>> list;
+    private ListView listview;
+    private String crypto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alerts);
-
+        Intent intent = getIntent();
+        crypto = intent.getStringExtra("crypto");
         Spinner currencies=findViewById(R.id.currencies);
+        TextView addAlert =findViewById(R.id.addAlert);
+        addAlert.setText("Add alert for " + crypto);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,
                 getResources().getStringArray(R.array.currencies));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -45,12 +58,12 @@ public class AlertActivity extends Activity
         currencies.setAdapter(adapter);
 
 
-        final ListView listview = (ListView) findViewById(R.id.listview);
+        listview = (ListView) findViewById(R.id.listview);
 
         String[] from = { "name", "purpose" };
         int[] to = { R.id.coin_label, R.id.coin_value };
 
-        ArrayList<Map<String, String>> list = buildData();
+        list = buildData();
         SimpleAdapter adapter1 = new SimpleAdapter(this,list,
                 R.layout.currency_table, from, to);
 
@@ -60,10 +73,10 @@ public class AlertActivity extends Activity
 
     private ArrayList<Map<String, String>> buildData() {
         ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
-        list.add(putData("Bitcoin     ", "9756"));
-        list.add(putData("Ethereum", "736"));
-        list.add(putData("Ripple      ", "0.86"));
-        list.add(putData("Litecoin   ", "178"));
+        list.add(putData("BTC     ", "9756" + " USD"));
+        list.add(putData("ETH", "736"+ " USD"));
+        list.add(putData("XRP      ", "0.86"+ " USD"));
+        list.add(putData("LTC   ", "178"+ " USD"));
         return list;
     }
 
@@ -74,13 +87,19 @@ public class AlertActivity extends Activity
         return item;
     }
 
-   /* public void onButtonClick(View view)
+    public void onButtonClick(View view)
     {
-        if (view.getId()==R.id.addAlert)
-        {
-            Intent i=new Intent (MainActivity.this, AlertActivity.class);
-            startActivity(i);
-        }
-    }*/
+            Spinner currencies=findViewById(R.id.currencies);
+            EditText threshold=findViewById(R.id.threshold);
+            String currency = currencies.getSelectedItem() != null ? currencies.getSelectedItem().toString() : "BTC";
+            String thresholdText = threshold.getText().toString();
+            list.add(putData(crypto,thresholdText + " " + currency));
+            final Adapter adapter = listview.getAdapter();
+            if (adapter instanceof BaseAdapter) {
+                ((BaseAdapter)adapter).notifyDataSetChanged();
+            } else {
+                throw new RuntimeException("Unexpected adapter");
+           }
+    }
 }
 
