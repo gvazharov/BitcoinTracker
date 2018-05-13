@@ -47,7 +47,14 @@ public class AlertActivity extends Activity
         sBtn = (ImageButton) findViewById(R.id.sBtn_A);
 
 
-        addAlert.setText("Add alert for " + crypto);
+       if(crypto==null)
+        {
+           addAlert.setText("Alerts");
+        }
+        else 
+        {
+            addAlert.setText("Add alert for " + crypto);
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,
                 getResources().getStringArray(R.array.currencies));
